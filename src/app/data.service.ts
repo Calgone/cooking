@@ -4,20 +4,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
-  contacts = [
-    { id: 1, name: 'Contact 001', description: 'Contact 001 des', email: 'c001@email.com' },
-    { id: 2, name: 'Contact 002', description: 'Contact 002 des', email: 'c002@email.com' },
-    { id: 3, name: 'Contact 003', description: 'Contact 003 des', email: 'c003@email.com' },
-    { id: 4, name: 'Contact 004', description: 'Contact 004 des', email: 'c004@email.com' }
+  recipes = [
+    { id: 1, title: 'Recipe 001', description: 'Recipe 001 des', difficulty: 3 },
+    { id: 2, title: 'Recipe 002', description: 'Recipe 002 des', difficulty: 2 },
+    { id: 3, title: 'Recipe 003', description: 'Recipe 003 des', difficulty: 5 },
+    { id: 4, title: 'Recipe 004', description: 'Recipe 004 des', difficulty: 1 },
+    { id: 5, title: 'Recipe 005', description: 'Recipe 005 des', difficulty: 4 }
   ];
 
   constructor() { }
 
-  public getContacts(): Array<{ id, name, description, email }> {
-    return this.contacts;
+  public getRecipes(): Array<{ id, title, description, difficulty }> {
+    return this.recipes;
   }
 
-  public createContact(contact: { id, name, description, email }) {
-    this.contacts.push(contact);
+  public createRecipe(recipe: { id, title, description, difficulty }) {
+    this.recipes.push(recipe);
   }
 }

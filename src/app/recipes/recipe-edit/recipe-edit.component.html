@@ -71,3 +71,41 @@
         </form>
     </div>
 </div> -->
+<h1>Recipe Edit</h1>
+
+<form #postForm="ngForm" (ngSubmit)="onCreateRecipe(postForm.value)"
+    class="recipe-form-container">
+    <mat-form-field>
+        <input matInput placeholder="title" type="text" id="title" required
+            ngModel name="title">
+    </mat-form-field>
+
+    <br>
+    <mat-form-field>
+        <textarea matInput placeholder="description" id="description" required
+            ngModel name="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Status">
+            <mat-option value="OPEN">Open</mat-option>
+            <mat-option value="IN_PROGRESS">In progress</mat-option>
+            <mat-option value="DONE">Done</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit"
+        [disabled]="!postForm.valid">
+        Send Post
+    </button>
+</form>
+<div>
+    <button mat-raised-button (click)="onFetchRecipes()">
+        Fetch Recipes
+    </button>
+    |
+    <button mat-raised-button color="warn" [disabled]="loadedRecipes.length < 1"
+        (click)="onClearRecipes()">
+        Clear Recipes
+    </button>
+</div>

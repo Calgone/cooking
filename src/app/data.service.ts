@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { Recipe } from './recipes/recipe.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +15,41 @@ export class DataService {
     { id: 5, title: 'Recipe 005', description: 'Recipe 005 des', difficulty: 4 }
   ];
 
-  constructor() { }
-
-  public getRecipes(): Array<{ id, title, description, difficulty }> {
-    return this.recipes;
+  constructor(
+    private http: HttpClient,
+  ) { }
+  //: Array<{ id, title, description, difficulty }> {
+  public getRecipes() {
+    return this.http.get('http://localhost:3000/recipes/all')
+      .pipe(
+        map(responseData => {
+          const recipesArray = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              recipesArray.push({ ...responseData[key] });
+            }
+          }
+          return recipesArray;
+        })
+      )
+      .subscribe(recipes => {
+        console.log(recipes);
+      });
+    // return this.recipes;
   }
 
-  public createRecipe(recipe: { id, title, description, difficulty }) {
-    this.recipes.push(recipe);
+  public createRecipe(recipe: Recipe) {
+    // this.recipes.push(recipe);
+    this.http
+      .post(
+        // 'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
+        'http://localhost:3000/auth/basic-test',
+        recipe
+      )
+      .subscribe(responseData => {
+        console.log(responseData);
+      });
   }
+
+
 }

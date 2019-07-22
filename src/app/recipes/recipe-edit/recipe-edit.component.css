@@ -1,0 +1,8 @@
+.recipe-form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* .recipe-form-container > * {
+    width: 100%;
+  } */

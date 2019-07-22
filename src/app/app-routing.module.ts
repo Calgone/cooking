@@ -9,18 +9,24 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipesComponent } from './recipes/recipes.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
-  { path: 'recipes', component: RecipesComponent, children: [
-    { path: '', component: RecipeHomeComponent },
-    { path: 'new', component: RecipeEditComponent },
-    { path: ':id', component: RecipeDetailComponent },
-    { path: ':id/edit', component: RecipeEditComponent }
-] },
+  {
+    path: 'recipes', component: RecipesComponent, children: [
+      { path: '', component: RecipeHomeComponent },
+      { path: 'new', component: RecipeEditComponent },
+      { path: ':id', component: RecipeDetailComponent },
+      { path: ':id/edit', component: RecipeEditComponent }
+    ]
+  },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    { enableTracing: false },
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

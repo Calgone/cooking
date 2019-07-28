@@ -2,11 +2,11 @@
 
     <button mat-button routerLink="/">
         <mat-icon>home</mat-icon>
-        {{title}}
+        Greg's Kitchen
     </button>
 
     <!-- This fills the remaining space of the current row -->
-    <span class="fill-remaining-space"></span>
+    <!-- <span class="fill-remaining-space"></span> -->
     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
         <button mat-button routerLink="/recipes">Recipes</button>
         <button mat-button routerLink="recipes/new">New Recipe</button>
@@ -62,13 +62,15 @@
             <button mat-menu-item>Blue Spiny Lizard</button>
             <button mat-menu-item disabled>Velociraptor</button>
         </mat-menu>
-
+        
     </div>
     <button mat-button [mat-menu-trigger-for]="menu" fxHide="false"
         fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
     </button>
-
+    <span class="fill-remaining-space"></span>
+    <input type="text" placeholder="search">
+    <a mat-button routerLink="/login">Login</a>
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
     <button mat-menu-item routerLink="/products">Products</button>

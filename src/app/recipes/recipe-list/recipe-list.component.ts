@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../data.service';
+import { RecipesService } from '../../recipes.service';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,16 +8,42 @@ import { DataService } from '../../data.service';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes;
+  recipes: Recipe[] = [];
   selectedRecipe;
+  isLoading = false;
+  loadedRecipes = [];
+  error = null;
 
-  constructor(public dataService: DataService) { }
+  constructor(private recipesService: RecipesService) { }
 
   ngOnInit() {
-    this.recipes = this.dataService.recipes;
+    this.fetchRecipes();
+    // this.recipes = this.dataService.getRecipes();
+    // console.log('RECIPES !', this.recipes);
   }
 
   public selectRecipe(recipe) {
     this.selectedRecipe = recipe;
+  }
+
+  onClearRecipes() {
+    // Send Http request
+  }
+
+  private fetchRecipes() {
+    this.isLoading = true;
+    this.recipesService.getRecipes().subscribe(res => {
+      this.isLoading = false;
+      this.recipes = res;
+    }, err => {
+
+    });
+  }
+
+  public deleteRecipe(id: number) {
+    this.recipesService.deleteRecipe(id).subscribe(
+      () => console.log(`Recipe ${id} deleted.`),
+      err => console.log(err)
+    );
   }
 }

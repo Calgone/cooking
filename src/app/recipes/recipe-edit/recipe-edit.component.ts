@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../data.service';
+import { RecipesService } from '../../recipes.service';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../recipe.model';
 
@@ -10,32 +10,18 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeEditComponent implements OnInit {
   // recipe: { id, title, description, difficulty } = { id: null, title: '', description: '', difficulty: 0 };
-  loadedRecipes = [];
 
   constructor(
-    public dataService: DataService,
+    public recipesService: RecipesService,
     private http: HttpClient
   ) { }
 
   ngOnInit() {
-    this.fetchRecipes();
   }
 
    onCreateRecipe(postData: Recipe) {
     // Send Http request
-    this.dataService.createRecipe(postData);
+    this.recipesService.createRecipe(postData);
   }
 
-  onFetchRecipes() {
-    // Send Http request
-    this.fetchRecipes();
-  }
-
-  onClearRecipes() {
-    // Send Http request
-  }
-
-  private fetchRecipes() {
-    this.dataService.getRecipes();
-  }
 }

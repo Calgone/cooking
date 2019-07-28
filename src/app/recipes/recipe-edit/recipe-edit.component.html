@@ -96,16 +96,7 @@
 
     <button mat-raised-button color="primary" type="submit"
         [disabled]="!postForm.valid">
-        Send Post
+        Save Recipe
     </button>
+    
 </form>
-<div>
-    <button mat-raised-button (click)="onFetchRecipes()">
-        Fetch Recipes
-    </button>
-    |
-    <button mat-raised-button color="warn" [disabled]="loadedRecipes.length < 1"
-        (click)="onClearRecipes()">
-        Clear Recipes
-    </button>
-</div>

@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+/* @import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; */
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 body {
     font-family: Roboto;
+}
+app-root {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }

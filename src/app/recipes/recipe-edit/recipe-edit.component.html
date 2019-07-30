@@ -73,30 +73,34 @@
 </div> -->
 <h1>Recipe Edit</h1>
 
-<form #postForm="ngForm" (ngSubmit)="onCreateRecipe(postForm.value)"
-    class="recipe-form-container">
-    <mat-form-field>
-        <input matInput placeholder="title" type="text" id="title" required
-            ngModel name="title">
-    </mat-form-field>
+<div class="row">
+    <div class="col-12">
+        <form #postForm="ngForm" (ngSubmit)="onCreateRecipe(postForm.value)"
+            class="recipe-form-container">
+            <div>
+                <input matInput placeholder="title" type="text" id="title"
+                    required ngModel name="title">
+            </div>
 
-    <br>
-    <mat-form-field>
-        <textarea matInput placeholder="description" id="description" required
-            ngModel name="description"></textarea>
-    </mat-form-field>
+            <br>
+            <div>
+                <textarea matInput placeholder="description" id="description"
+                    required ngModel name="description"></textarea>
+            </div>
 
-    <mat-form-field>
-        <mat-select placeholder="Status">
-            <mat-option value="OPEN">Open</mat-option>
-            <mat-option value="IN_PROGRESS">In progress</mat-option>
-            <mat-option value="DONE">Done</mat-option>
-        </mat-select>
-    </mat-form-field>
+            <div>
+                <select placeholder="Status">
+                <option value="OPEN">Open</option>
+                <option value="IN_PROGRESS">In progress</option>
+                <option value="DONE">Done</option>
+                </select>
+            </div>
 
-    <button mat-raised-button color="primary" type="submit"
-        [disabled]="!postForm.valid">
-        Save Recipe
-    </button>
-    
-</form>
+            <button class="btn btn-primary" type="submit"
+                [disabled]="!postForm.valid">
+                Save Recipe
+            </button>
+
+        </form>
+    </div>
+</div>

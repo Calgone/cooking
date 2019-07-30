@@ -18,17 +18,17 @@
         <td>
           &nbsp;
           <button mat-stroked-button color="accent" (click)="selectRecipe(recipe)">
-            <mat-icon>details</mat-icon>Details
+              <fa-icon [icon]="['fas', 'search']"></fa-icon>Details
           </button>
           &nbsp;
           <button mat-stroked-button color="warn" (click)="deleteRecipe(recipe.id)">
-            <mat-icon>delete_forever</mat-icon>Delete
+            <fa-icon [icon]="['fas', 'trash']"></fa-icon>Delete
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-  <p *ngIf="isLoading"><mat-progress-spinner></mat-progress-spinner>Loading...</p>
+  <p *ngIf="isLoading && !error">Loading...</p>
   <div ></div>
   <button mat-button routerLink="/recipes/new">New Recipe</button>
   <div class="card text-center" *ngIf="selectedRecipe">
@@ -48,9 +48,13 @@
       Fetch Recipes
     </button>
     |
-    <button mat-raised-button color="warn" [disabled]="loadedRecipes.length < 1"
+    <button mat-raised-button color="warn" [disabled]="recipes.length < 1"
       (click)="onClearRecipes()">
       Clear Recipes
     </button>
+  </div>
+  <div class="alert" *ngIf="error">
+    <h3>An error occured</h3>
+    <p>{{ error }}</p>
   </div>
 </div>

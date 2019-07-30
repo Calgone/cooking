@@ -1,22 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
-// Angular Material
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MatMenuModule } from '@angular/material/menu';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatToolbarModule } from '@angular/material/toolbar';
-// import { MatButtonModule } from '@angular/material/button';
-// import { MatTableModule } from '@angular/material/table';
-// import { MatTabsModule } from '@angular/material/tabs';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { MatInputModule } from '@angular/material';
-// import { MatSelectModule } from '@angular/material/select';
-// import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { MyMaterialModule } from './material.module';
+// ng-bootstrap
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+// fa
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faSearch, faTrash, faHome } from '@fortawesome/free-solid-svg-icons';
 
 // Project imports
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +24,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeHomeComponent } from './recipes/recipe-home/recipe-home.component';
 import { LoginComponent } from './login/login.component';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -49,21 +44,17 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    // MatMenuModule,
-    // MatIconModule,
-    // MatToolbarModule,
-    // MatButtonModule,
-    // MatTableModule,
-    // MatTabsModule,
-    // MatFormFieldModule,
-    // MatInputModule,
-    // MatSelectModule,
-    // MatProgressSpinnerModule,
-    MyMaterialModule,
+    // BrowserAnimationsModule,
+    // FlexLayoutModule,
+    // MyMaterialModule,
+    NgbModule,
+    FontAwesomeModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    library.add(faSearch, faTrash, faHome);
+  }
+}

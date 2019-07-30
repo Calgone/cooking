@@ -1,15 +1,29 @@
 <div class="jumbotron" style="background-color: #fff; height: calc(95vh);">
-    <h1 class="mat-display-2">Angular Bootstrap Demo</h1>
+    <h1 class="display-4">Angular Bootstrap Demo</h1>
     <p class="lead">
         This site is all about cooking and nutrition !
     </p>
-    <button mat-button color="primary">View tutorial</button>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     <input type="text" [(ngModel)]="name">
     <p>{{name}}</p>
-    <mat-tab-group>
-        <mat-tab label="First"> Content 1 </mat-tab>
-        <mat-tab label="Second"> Content 2 </mat-tab>
-        <mat-tab label="Third"> Content 3 </mat-tab>
-      </mat-tab-group>
-      
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a id="home-tab" class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+            <a id="profile-tab" class="nav-link" href="#">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a id="contact" class="nav-link disabled" href="#">Contact</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel"
+            aria-labelledby="home-tab">...</div>
+        <div class="tab-pane fade" id="profile" role="tabpanel"
+            aria-labelledby="profile-tab">...</div>
+        <div class="tab-pane fade" id="contact" role="tabpanel"
+            aria-labelledby="contact-tab">...</div>
+    </div>
 </div>

@@ -11,7 +11,6 @@ export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
   selectedRecipe;
   isLoading = false;
-  loadedRecipes = [];
   error = null;
 
   constructor(private recipesService: RecipesService) { }
@@ -36,7 +35,7 @@ export class RecipeListComponent implements OnInit {
       this.isLoading = false;
       this.recipes = res;
     }, err => {
-
+      this.error = err.message;
     });
   }
 

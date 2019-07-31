@@ -5,25 +5,30 @@
     </p>
     <hr class="my-4">
     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    <br>
     <input type="text" [(ngModel)]="name">
     <p>{{name}}</p>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a id="home-tab" class="nav-link active" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-            <a id="profile-tab" class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a id="contact" class="nav-link disabled" href="#">Contact</a>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel"
-            aria-labelledby="home-tab">...</div>
-        <div class="tab-pane fade" id="profile" role="tabpanel"
-            aria-labelledby="profile-tab">...</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel"
-            aria-labelledby="contact-tab">...</div>
-    </div>
+    <ngb-tabset>
+        <ngb-tab title="Home">
+            <ng-template ngbTabContent>
+                <p>
+                    Home content
+                </p>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+            <ng-template ngbTabTitle><b>Profile</b> details</ng-template>
+            <ng-template ngbTabContent>
+                <h3>Profile title</h3>
+                <p>Profile content.</p>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Contact">
+            <ng-template ngbTabContent>
+                <p>
+                    Contact content.
+                </p>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
 </div>

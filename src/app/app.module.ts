@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { FlexLayoutModule } from '@angular/flex-layout';
 
 // ng-bootstrap
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // fa
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';

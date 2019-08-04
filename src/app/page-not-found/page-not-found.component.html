@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1>Oops !</h1>
+                    <h2>404 Not found</h2>
+                    <p class="lead">
+                        Sorry, an error has occured, requested page not found :(
+                    </p>
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group mx-2">
+                            <a class="btn btn-primary" [routerLink]="['/home']">
+                                <fa-icon [icon]="['fas', 'home']"></fa-icon>
+                                Back to home
+                            </a>
+                        </div>
+                        <div class="btn-group mx-2">
+                            <a class="btn btn-secondary"
+                                [routerLink]="['/contact']">
+                                <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
+                                Contact support
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

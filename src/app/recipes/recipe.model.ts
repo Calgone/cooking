@@ -4,4 +4,5 @@ export interface Recipe {
     description: string;
     status: string;
     userId: number;
+    public: boolean;
 }

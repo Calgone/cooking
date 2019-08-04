@@ -38,6 +38,11 @@ export class RecipesService {
     // return this.recipes;
   }
 
+  public getRecipe(id: number): Observable<Recipe> {
+    return this.http
+      .get<Recipe>(`${this.baseUrl}/${id}`);
+  }
+
   public createRecipe(recipe: Recipe) {
     // this.recipes.push(recipe);
     this.http

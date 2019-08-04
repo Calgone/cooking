@@ -11,17 +11,20 @@
     </thead>
     <tbody>
       <tr *ngFor="let recipe of recipes">
-
         <td>{{ recipe.id }}</td>
         <td> {{ recipe.title }}</td>
         <td> {{ recipe.description }}</td>
         <td>
           &nbsp;
-          <button mat-stroked-button color="accent" (click)="selectRecipe(recipe)">
+          <button class="btn btn-link" (click)="selectRecipe(recipe)">
               <fa-icon [icon]="['fas', 'search']"></fa-icon>Details
           </button>
           &nbsp;
-          <button mat-stroked-button color="warn" (click)="deleteRecipe(recipe.id)">
+          <button class="btn btn-link" [routerLink]="[recipe.id, 'edit']">
+              <fa-icon [icon]="['fas', 'pen']"></fa-icon>Details
+          </button>
+          &nbsp;
+          <button class="btn btn-outline-danger" (click)="deleteRecipe(recipe.id)">
             <fa-icon [icon]="['fas', 'trash']"></fa-icon>Delete
           </button>
         </td>
@@ -30,7 +33,7 @@
   </table>
   <p *ngIf="isLoading && !error">Loading...</p>
   <div ></div>
-  <button mat-button routerLink="/recipes/new">New Recipe</button>
+  <button class="btn btn-outline-primary" routerLink="/recipes/new">New Recipe</button>
   <div class="card text-center" *ngIf="selectedRecipe">
     <div class="card-header">
       # {{selectedRecipe.id}}
@@ -44,11 +47,11 @@
 
   </div>
   <div>
-    <button mat-raised-button (click)="fetchRecipes()">
+    <button class="btn btn-outline-info" (click)="fetchRecipes()">
       Fetch Recipes
     </button>
     |
-    <button mat-raised-button color="warn" [disabled]="recipes.length < 1"
+    <button class="btn btn-warning" [disabled]="recipes.length < 1"
       (click)="onClearRecipes()">
       Clear Recipes
     </button>

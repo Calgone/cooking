@@ -5,61 +5,46 @@ import { Recipe } from './recipes/recipe.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class RecipesService {
+    private baseUrl = 'http://localhost:3000/recipes';
+    // private http: HttpClient;
 
-  baseUrl = 'http://localhost:3000/recipes';
+    public constructor(private http: HttpClient) {}
 
-  constructor(
-    private http: HttpClient,
-  ) { }
+    public getRecipes(): Observable<Recipe[]> {
+        return this.http.get<Recipe[]>(`${this.baseUrl}/all`).pipe(
+            map((responseData): Recipe[] => {
+                const recipesArray: Recipe[] = [];
+                for (const key in responseData) {
+                    if (responseData.hasOwnProperty(key)) {
+                        recipesArray.push({ ...responseData[key] });
+                    }
+                }
+                return recipesArray;
+            }),
+        );
+        // .subscribe(recipes => {
+        //   console.log(recipes);
+        //   return recipes;
+        // }
+        // );
+        // return this.recipes;
+    }
 
+    public getRecipe(id: number): Observable<Recipe> {
+        return this.http.get<Recipe>(`${this.baseUrl}/${id}`);
+    }
 
-  public getRecipes(): Observable<Recipe[]> {
-    return this.http
-      .get<Recipe[]>(`${this.baseUrl}/all`)
-      .pipe(
-        map(responseData => {
-          const recipesArray: Recipe[] = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              recipesArray.push({ ...responseData[key] });
-            }
-          }
-          return recipesArray;
-        })
-      );
-    // .subscribe(recipes => {
-    //   console.log(recipes);
-    //   return recipes;
-    // }
-    // );
-    // return this.recipes;
-  }
+    public createRecipe(recipe: Recipe): void {
+        // this.recipes.push(recipe);
+        this.http.post(`${this.baseUrl}`, recipe).subscribe((responseData): void => {
+            console.log(responseData);
+        });
+    }
 
-  public getRecipe(id: number): Observable<Recipe> {
-    return this.http
-      .get<Recipe>(`${this.baseUrl}/${id}`);
-  }
-
-  public createRecipe(recipe: Recipe) {
-    // this.recipes.push(recipe);
-    this.http
-      .post(
-        // 'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
-        `${this.baseUrl}`,
-        recipe
-      )
-      .subscribe(responseData => {
-        console.log(responseData);
-      });
-  }
-
-  public deleteRecipe(id: number): Observable<void> {
-    return this.http
-      .delete<void>(
-        `${this.baseUrl}/${id}`
-      );
-  }
+    public deleteRecipe(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    }
 }

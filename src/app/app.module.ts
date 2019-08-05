@@ -30,35 +30,28 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    RecipeListComponent,
-    RecipesComponent,
-    RecipeEditComponent,
-    RecipeDetailComponent,
-    RecipeHomeComponent,
-    LoginComponent,
-    UsersComponent,
-    PageNotFoundComponent,
-    UserEditComponent,
-    UserListComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    NgbModule,
-    FontAwesomeModule,
-  ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        HeaderComponent,
+        FooterComponent,
+        RecipeListComponent,
+        RecipesComponent,
+        RecipeEditComponent,
+        RecipeDetailComponent,
+        RecipeHomeComponent,
+        LoginComponent,
+        UsersComponent,
+        PageNotFoundComponent,
+        UserEditComponent,
+        UserListComponent,
+    ],
+    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, NgbModule, FontAwesomeModule],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+    bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor() {
-    library.add(faSearch, faTrash, faHome, faEnvelope, faPen);
-  }
+    public constructor() {
+        library.add(faSearch, faTrash, faHome, faEnvelope, faPen);
+    }
 }

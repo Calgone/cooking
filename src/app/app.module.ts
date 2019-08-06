@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // ng-bootstrap
@@ -46,7 +46,15 @@ import { UserListComponent } from './users/user-list/user-list.component';
         UserEditComponent,
         UserListComponent,
     ],
-    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, NgbModule, FontAwesomeModule],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgbModule,
+        FontAwesomeModule,
+    ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
     bootstrap: [AppComponent],
 })

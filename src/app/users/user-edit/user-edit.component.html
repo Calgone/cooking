@@ -4,23 +4,121 @@
             class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
             <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="username">Login</label>
+                    <div
+                        class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input" id="rMadame"
+                            type="radio" formControlName="title"
+                            [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                            value="Madame">
+                        <label class="custom-control-label"
+                            for="rMadame">Madame</label>
+                    </div>
+                    <div
+                        class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input" id="rMademoiselle"
+                            type="radio" formControlName="title"
+                            [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                            value="Mademoiselle">
+                        <label class="custom-control-label"
+                            for="rMademoiselle">Mademoiselle</label>
+                    </div>
+                    <div
+                        class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input" id="rMonsieur"
+                            type="radio" formControlName="title"
+                            [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                            value="Monsieur">
+                        <label class="custom-control-label"
+                            for="rMonsieur">Monsieur</label>
+                        <div *ngIf="submitted && !!f.title.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="!!f.title.errors.required">
+                                &nbsp;This field is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname"
+                        formControlName="firstname" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                    <div *ngIf="submitted && !!f.firstname.errors"
+                        class="invalid-feedback">
+                        <div *ngIf="!!f.firstname.errors.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" formControlName="lastname"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+                    <div *ngIf="submitted && f['lastname'].errors"
+                        class="invalid-feedback">
+                        <div *ngIf="!!f.lastname.errors.required">
+                            This field is required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
                     <input type="text" id="username" formControlName="username"
-                        class="form-control">
-                    <span
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && !!f.username.errors }">
+                    <div *ngIf="submitted && f['username'].errors"
+                        class="invalid-feedback">
+                        <div *ngIf="!!f.username.errors.required">
+                            This field is required
+                        </div>
+                    </div>
+                    <!-- <span
                         *ngIf="!userForm.get('username').valid && userForm.get('username').touched"
-                        class="invalid-feedback">Enter a valid username</span>
+                        class="invalid-feedback">Enter a valid username</span> -->
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="text" id="email" formControlName="email"
-                        class="form-control">
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                    <div *ngIf="submitted && !!f.email.errors"
+                        class="invalid-feedback">
+                        <div *ngIf="!!f.email.errors.required">
+                            This field is required
+                        </div>
+                    </div>
+
                 </div>
-                <div class="form-check-inline" *ngFor="let title of titles">
-                    <label>
-                        <input class="form-check-input" type="radio"
-                            formControlName="title" [value]="title">{{ title }}
-                    </label>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" formControlName="password1"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password1.errors }">
+                    <div *ngIf="submitted && !!f.password1.errors"
+                        class="invalid-feedback">
+                        <div *ngIf="!!f.password1.errors.required">
+                            This field is required
+                        </div>
+                        <div *ngIf="!!f.password1.errors.minlength">
+                            Password must be at least 8 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" formControlName="password2"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password2.errors }">
+                    <div *ngIf="submitted && !!f.password2.errors"
+                        class="invalid-feedback">
+                        <div *ngIf="!!f.password2.errors.required">
+                            This field is required
+                        </div>
+                        <div *ngIf="!!f.password2.errors.mustMatch">
+                            Passwords must match
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary"

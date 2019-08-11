@@ -75,36 +75,149 @@
 
 <div class="row">
     <div class="col-12">
-        <form #postForm="ngForm" (ngSubmit)="onCreateRecipe(postForm.value)"
+        <form #recipeForm="ngForm" (ngSubmit)="onCreateRecipe(recipeForm.value)"
             class="recipe-form-container">
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="public"
-                    required ngModel name="public">
-                <label class="form-check-label" for="public">Public
-                    Recipe</label>
+                    ngModel name="public">
+                <label class="form-check-label" for="public">
+                    Public Recipe
+                </label>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="title" type="text"
-                    id="title" required ngModel name="title">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control"
+                    placeholder="Your recipe title" [(ngModel)]="recipe.title"
+                    #title="ngModel"
+                    [ngClass]="{ 'is-invalid': recipeForm.submitted && title.invalid }"
+                    required minlength="6">
+                <div *ngIf="recipeForm.submitted && title.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="title.hasError('required')">
+                        Title is required
+                    </div>
+                    <div *ngIf="title.hasError('minlength')">
+                        Title must be at least 6 characters
+                    </div>
+                </div>
             </div>
-
-            <br>
             <div class="form-group">
                 <textarea class="form-control" placeholder="description"
-                    id="description" required ngModel
-                    name="description"></textarea>
+                    id="description" name="description"
+                    [(ngModel)]="recipe.description" #description="ngModel"
+                    [ngClass]="{ 'is-invalid': recipeForm.submitted && description.invalid }"
+                    required minlength="6"></textarea>
+                <div *ngIf="recipeForm.submitted && description.invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="description.hasError('required')">
+                        Description is required
+                    </div>
+                    <div *ngIf="description.hasError('minlength')">
+                        Description must be at least 6 characters
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="servings">Number of servings</label>
+                    <input class="form-control" type="number"
+                        [(ngModel)]="recipe.servings" #servings="ngModel"
+                        [ngClass]="{ 'is-invalid': recipeForm.submitted && servings.invalid }"
+                        id="servings" name="servings" required min="0"
+                        max="100">
+                    <div *ngIf="recipeForm.submitted && servings.invalid"
+                        class="invalid-feedback">
+                        <div *ngIf="servings.invalid">
+                            This is not valid.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label for="cost">Cost</label>
+                    <input class="form-control" type="number"
+                        [(ngModel)]="recipe.cost" #cost="ngModel"
+                        [ngClass]="{ 'is-invalid': recipeForm.submitted && cost.invalid }"
+                        id="cost" name="cost" required min="0" max="1000">
+                    <div *ngIf="recipeForm.submitted && cost.invalid"
+                        class="invalid-feedback">
+                        <div *ngIf="cost.invalid">
+                            This is not valid.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label for="difficulty">Difficulty</label>
+                    <input class="form-control" type="number"
+                        [(ngModel)]="recipe.difficulty" #difficulty="ngModel"
+                        [ngClass]="{ 'is-invalid': recipeForm.submitted && difficulty.invalid }"
+                        id="difficulty" name="difficulty" required min="0"
+                        max="10">
+                    <div *ngIf="recipeForm.submitted && difficulty.invalid"
+                        class="invalid-feedback">
+                        <div *ngIf="difficulty.invalid">
+                            This is not valid.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label for="prep_minutes">Prep time (mn)</label>
+                    <input class="form-control" type="number"
+                        [(ngModel)]="recipe.prep_minutes"
+                        #prep_minutes="ngModel"
+                        [ngClass]="{ 'is-invalid': recipeForm.submitted && prep_minutes.invalid }"
+                        id="prep_minutes" name="prep_minutes" required min="0"
+                        max="100">
+                    <div *ngIf="recipeForm.submitted && prep_minutes.invalid"
+                        class="invalid-feedback">
+                        <div *ngIf="prep_minutes.invalid">
+                            This is not valid.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label for="cook_minutes">Cook time (mn)</label>
+                    <input class="form-control" type="number"
+                        [(ngModel)]="recipe.cook_minutes"
+                        #cook_minutes="ngModel"
+                        [ngClass]="{ 'is-invalid': recipeForm.submitted && cook_minutes.invalid }"
+                        id="cook_minutes" name="cook_minutes" required min="0"
+                        max="10000">
+                    <div *ngIf="recipeForm.submitted && cook_minutes.invalid"
+                        class="invalid-feedback">
+                        <div *ngIf="cook_minutes.invalid">
+                            This is not valid.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label for="rest_minutes">Rest time (mn)</label>
+                    <input class="form-control" type="number"
+                        [(ngModel)]="recipe.rest_minutes"
+                        #rest_minutes="ngModel"
+                        [ngClass]="{ 'is-invalid': recipeForm.submitted && rest_minutes.invalid }"
+                        ngModel id="rest_minutes" name="rest_minutes" required
+                        min="0" max="10">
+                    <div *ngIf="recipeForm.submitted && rest_minutes.invalid"
+                        class="invalid-feedback">
+                        <div *ngIf="rest_minutes.invalid">
+                            This is not valid.
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <select class="form-control" placeholder="Status">
                     <option value="OPEN">Open</option>
                     <option value="IN_PROGRESS">In progress</option>
                     <option value="DONE">Done</option>
                 </select>
-            </div>
+            </div> -->
 
-            <button class="btn btn-primary" type="submit"
-                [disabled]="!postForm.valid">
+            <button class="btn btn-primary" type="submit">
+                <!-- [disabled]="!recipeForm.valid"> -->
                 Save Recipe
             </button>
 
